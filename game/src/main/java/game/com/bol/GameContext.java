@@ -26,6 +26,13 @@ public class GameContext {
 	    board = initialBoard();
 	}
 	
+	public void refreshContext() {
+		firstPlayer = null;
+		secondPlayer = null;
+		currentPlayer = null;
+		board = initialBoard();
+	}
+	
 	private Board initialBoard() {
 		
 		List<Pit> pitsA = new ArrayList<Pit>();
@@ -82,6 +89,7 @@ public class GameContext {
 
 	public void setFirstPlayer(Player firstPlayer) {
 		this.firstPlayer = firstPlayer;
+		this.currentPlayer = firstPlayer;
 	}
 
 	public Player getSecondPlayer() {

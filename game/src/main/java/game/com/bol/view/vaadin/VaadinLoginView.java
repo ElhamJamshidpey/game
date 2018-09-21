@@ -45,7 +45,7 @@ public class VaadinLoginView extends UI implements ViewDisplay{
 
         layout.addComponent(playerName);
 
-        Button playButton = new Button("Login");
+        Button playButton = new Button("LOGIN");
         
         playButton.addClickListener(new Button.ClickListener() {
             public void buttonClick(ClickEvent event) {

@@ -52,6 +52,7 @@ public class VaadinBoardView extends UI implements ViewDisplay{
         layout.addComponent(des);
 
         Button playButton = new Button("PLAY");
+        Button reloadGame = new Button("RELOAD");
         
         playButton.addClickListener(new Button.ClickListener() {
             public void buttonClick(ClickEvent event) {
@@ -61,7 +62,7 @@ public class VaadinBoardView extends UI implements ViewDisplay{
 	        		if(presenter.gameIsFinish()) {
 	            	   winnerName.setCaption("Game Is Finish , Winner "+ presenter.findWinner());
 	            	   layout.removeComponent(playButton);
-	            	   layout.addComponent(winnerName);
+	            	   layout.addComponents(reloadGame,winnerName);
 	        		}
 				} catch (MovingException e) {
 					Notification.show("Moving not alowd!",
@@ -73,7 +74,12 @@ public class VaadinBoardView extends UI implements ViewDisplay{
         });
         layout.addComponent(playButton);
         
-        
+        reloadGame.addClickListener(new Button.ClickListener() {
+            public void buttonClick(ClickEvent event) {
+            	presenter.reloadGame();
+				getPage().setLocation("login");
+            }
+        });
 
 	}
 

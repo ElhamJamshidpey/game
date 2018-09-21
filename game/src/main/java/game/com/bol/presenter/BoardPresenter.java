@@ -40,4 +40,7 @@ public class BoardPresenter {
 		return null;
 	}
 	
+	public void reloadGame() {
+		context.refreshContext();
+	}
 }
