@@ -33,8 +33,8 @@ public class BolDotComStrategy implements GameStrategy {
 		}
 		
 		
-		if(gameIsFinish()) 
-			findWinner();
+//		if(gameIsFinish()) 
+//			findWinner();
 	}
 	
 	public boolean movingValidation(String src, String des) throws MovingException{
@@ -49,6 +49,7 @@ public class BolDotComStrategy implements GameStrategy {
 		//if last stone land in player big pit return true
 		return false;
 	}
+	
 	public boolean gameIsFinish() {
 		Board board = context.getBoard();
 		int playerApits = board.getFirstPlayerAPits().stream().map(Pit::getStoneNumber).mapToInt(Integer::intValue).sum();

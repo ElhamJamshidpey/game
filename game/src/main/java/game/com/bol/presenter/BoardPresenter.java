@@ -29,4 +29,15 @@ public class BoardPresenter {
 	public void loginPlayer(Player player) throws LoginException{
 		context.addPlayer(player);
 	}
+	
+	public boolean gameIsFinish() {
+		return game.gameIsFinish();
+	}
+	
+	public Player findWinner() {
+		if(game.gameIsFinish())
+			return game.findWinner();
+		return null;
+	}
+	
 }
