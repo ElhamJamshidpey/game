@@ -21,7 +21,6 @@ import game.com.bol.exception.LoginException;
 import game.com.bol.presenter.BoardPresenter;
 
 @SpringUI(path = "login")
-@SpringViewDisplay
 public class VaadinLoginView extends UI implements ViewDisplay{
 
 	@Autowired

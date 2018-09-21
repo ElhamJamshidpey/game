@@ -22,7 +22,6 @@ import game.com.bol.exception.MovingException;
 import game.com.bol.presenter.BoardPresenter;
 
 @SpringUI(path = "game")
-@SpringViewDisplay
 public class VaadinBoardView extends UI implements ViewDisplay{
 
 	@Autowired
