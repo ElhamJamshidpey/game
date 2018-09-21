@@ -4,72 +4,53 @@ import java.util.List;
 
 public class Board {
 	
-	private List<Pit> playerAPits;
+	private List<Pit> firstPlayerAPits;
 	
-	private Pit playerALargerPit;
+	private Pit firstPlayerLargerPit;
 	
-	private List<Pit> playerBPits;
+	private List<Pit> secondPlayerBPits;
 	
-	private Pit playerBLargerPit;
+	private Pit secondPlayerLargerPit;
 	
-	private Player currentPlayer;
-
 	
 	public Board(List<Pit> playerAPits, List<Pit> playerBPits) {
-		this.playerAPits = playerAPits;
-		this.playerALargerPit = new Pit("L",0);
-		this.playerBPits = playerBPits;
-		this.playerBLargerPit = new Pit("L",0);
+		this.firstPlayerAPits = playerAPits;
+		this.firstPlayerLargerPit = new Pit("L",0);
+		this.secondPlayerBPits = playerBPits;
+		this.secondPlayerLargerPit = new Pit("L",0);
 	}
 
-
-	public List<Pit> getPlayerAPits() {
-		return playerAPits;
+	public List<Pit> getFirstPlayerAPits() {
+		return firstPlayerAPits;
 	}
 
-
-	public void setPlayerAPits(List<Pit> playerAPits) {
-		this.playerAPits = playerAPits;
+	public void setFirstPlayerAPits(List<Pit> firstPlayerAPits) {
+		this.firstPlayerAPits = firstPlayerAPits;
 	}
 
-
-	public Pit getPlayerALargerPit() {
-		return playerALargerPit;
+	public Pit getFirstPlayerLargerPit() {
+		return firstPlayerLargerPit;
 	}
 
-
-	public void setPlayerALargerPit(Pit playerALargerPit) {
-		this.playerALargerPit = playerALargerPit;
+	public void setFirstPlayerLargerPit(Pit firstPlayerLargerPit) {
+		this.firstPlayerLargerPit = firstPlayerLargerPit;
 	}
 
-
-	public List<Pit> getPlayerBPits() {
-		return playerBPits;
+	public List<Pit> getSecondPlayerBPits() {
+		return secondPlayerBPits;
 	}
 
-
-	public void setPlayerBPits(List<Pit> playerBPits) {
-		this.playerBPits = playerBPits;
+	public void setSecondPlayerBPits(List<Pit> secondPlayerBPits) {
+		this.secondPlayerBPits = secondPlayerBPits;
 	}
 
-
-	public Pit getPlayerBLargerPit() {
-		return playerBLargerPit;
+	public Pit getSecondPlayerLargerPit() {
+		return secondPlayerLargerPit;
 	}
 
-
-	public void setPlayerBLargerPit(Pit playerBLargerPit) {
-		this.playerBLargerPit = playerBLargerPit;
+	public void setSecondPlayerLargerPit(Pit secondPlayerLargerPit) {
+		this.secondPlayerLargerPit = secondPlayerLargerPit;
 	}
 
-
-	public Player getCurrentPlayer() {
-		return currentPlayer;
-	}
-
-
-	public void setCurrentPlayer(Player currentPlayer) {
-		this.currentPlayer = currentPlayer;
-	}
 
 }
