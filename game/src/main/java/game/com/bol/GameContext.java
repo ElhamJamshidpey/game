@@ -87,23 +87,15 @@ public class GameContext {
 		return firstPlayer;
 	}
 
-	public void setFirstPlayer(Player firstPlayer) {
-		this.firstPlayer = firstPlayer;
-		this.currentPlayer = firstPlayer;
-	}
-
 	public Player getSecondPlayer() {
 		return secondPlayer;
 	}
 
-	public void setSecondPlayer(Player secondPlayer) {
-		this.secondPlayer = secondPlayer;
-	}
-	
 	public void addPlayer(Player newPlayer) throws LoginException{
-		if(firstPlayer==null)
+		if(firstPlayer==null) {
 			firstPlayer = newPlayer;
-		else if(secondPlayer==null) 
+			currentPlayer = newPlayer;
+		}else if(secondPlayer==null) 
 			secondPlayer = newPlayer;
 		else throw new LoginException("2 Other User are playing now");
 	}
