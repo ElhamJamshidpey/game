@@ -24,6 +24,21 @@ public class BoardPresenterTest {
 	@Test
 	public void testFindWinner() {
 		Mockito.when(strategyMock.gameIsFinish()).thenReturn(false);
-		Assert.assertEquals(null,presenter.findWinner());
+		Assert.assertNull(presenter.findWinner());
 	}
+	
+	@Test
+	public void testgameIsFinish() {
+		Mockito.when(strategyMock.gameIsFinish()).thenReturn(true);
+		Assert.assertTrue(presenter.gameIsFinish());
+		
+	}
+	
+	@Test
+	public void testgameIsNotFinish() {
+		Mockito.when(strategyMock.gameIsFinish()).thenReturn(false);
+		Assert.assertFalse(presenter.gameIsFinish());
+		
+	}
+	
 }
