@@ -10,30 +10,29 @@ import com.vaadin.spring.annotation.SpringViewDisplay;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Component;
-import com.vaadin.ui.Label;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 
-import game.com.bol.component.Board;
-import game.com.bol.exception.MovingException;
+import game.com.bol.component.Player;
+import game.com.bol.exception.LoginException;
 import game.com.bol.presenter.BoardPresenter;
 
-@SpringUI(path = "game")
+@SpringUI(path = "login")
 @SpringViewDisplay
-public class BoardView extends UI implements ViewDisplay{
+public class VaadinLoginView extends UI implements ViewDisplay{
 
 	@Autowired
 	private BoardPresenter presenter;
 	
 	private Panel springViewDisplay;
-		
+
 	@Override
 	public void showView(View view) {
         springViewDisplay.setContent((Component) view);
-		
+
 	}
 
 	@Override
@@ -42,45 +41,27 @@ public class BoardView extends UI implements ViewDisplay{
 		final VerticalLayout layout = new VerticalLayout();
         setContent(layout);
         
-        showBoard(presenter.loadBoard());
         
-        TextField src = new TextField("Source");
-        TextField des = new TextField("Destination");
+        TextField playerName = new TextField("Enter Your Name:");
 
-        Label winnerName = new Label();
-        
-        layout.addComponent(src);
-        layout.addComponent(des);
+        layout.addComponent(playerName);
 
-        Button playButton = new Button("PLAY");
+        Button playButton = new Button("Login");
         
         playButton.addClickListener(new Button.ClickListener() {
             public void buttonClick(ClickEvent event) {
-        		try {
-					presenter.play(src.getValue(),des.getValue());
-					showBoard(presenter.loadBoard());
-	        		if(presenter.gameIsFinish()) {
-	            	   winnerName.setCaption("Game Is Finish , Winner "+ presenter.findWinner());
-	            	   layout.removeComponent(playButton);
-	            	   layout.addComponent(winnerName);
-	        		}
-				} catch (MovingException e) {
-					Notification.show("Moving not alowd!",
+            	try {
+					presenter.loginPlayer(new Player(playerName.getValue()));
+					getPage().setLocation("game");
+				} catch (LoginException e) {
+					Notification.show("Login Failed!",
 			                  e.getMessage(),
 			                  Notification.Type.HUMANIZED_MESSAGE);
 				}
-        		
             }
         });
         layout.addComponent(playButton);
-        
-        
 
 	}
 
-	private void showBoard(Board loadBoard) {
-		//TODO!
-	}
-
-    
 }
