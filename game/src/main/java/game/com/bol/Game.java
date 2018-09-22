@@ -17,67 +17,66 @@ import game.com.bol.strategy.GameStrategy;
 
 @Component
 public class Game {
-	
+
 	@Autowired
 	private GameStrategy game;
-	
 
 	private Board board;
 	private Player currentPlayer;
-	
+
 	private Player firstPlayer;
 	private Player secondPlayer;
-	
+
 	@PostConstruct
 	public void run() {
-	    board = initialBoard();
+		board = initialBoard();
 	}
-	
+
 	public void reload() {
 		firstPlayer = null;
 		secondPlayer = null;
 		currentPlayer = null;
 		board = initialBoard();
 	}
-	
+
 	private Board initialBoard() {
-		
+
 		List<Pit> pitsA = new ArrayList<Pit>();
-		Pit pa1 = new Pit("a",6);
-		Pit pa2 = new Pit("b",6);
-		Pit pa3 = new Pit("c",6);
-		Pit pa4 = new Pit("d",6);
-		Pit pa5 = new Pit("e",6);
-		Pit pa6 = new Pit("f",6);
+		Pit pa1 = new Pit("a", 6);
+		Pit pa2 = new Pit("b", 6);
+		Pit pa3 = new Pit("c", 6);
+		Pit pa4 = new Pit("d", 6);
+		Pit pa5 = new Pit("e", 6);
+		Pit pa6 = new Pit("f", 6);
 		pitsA.add(pa1);
 		pitsA.add(pa2);
 		pitsA.add(pa3);
 		pitsA.add(pa4);
 		pitsA.add(pa5);
 		pitsA.add(pa6);
-		
+
 		List<Pit> pitsB = new ArrayList<Pit>();
-		Pit pb1 = new Pit("a",6);
-		Pit pb2 = new Pit("b",6);
-		Pit pb3 = new Pit("c",6);
-		Pit pb4 = new Pit("d",6);
-		Pit pb5 = new Pit("e",6);
-		Pit pb6 = new Pit("f",6);
+		Pit pb1 = new Pit("a", 6);
+		Pit pb2 = new Pit("b", 6);
+		Pit pb3 = new Pit("c", 6);
+		Pit pb4 = new Pit("d", 6);
+		Pit pb5 = new Pit("e", 6);
+		Pit pb6 = new Pit("f", 6);
 		pitsB.add(pb1);
 		pitsB.add(pb2);
 		pitsB.add(pb3);
 		pitsB.add(pb4);
 		pitsB.add(pb5);
 		pitsB.add(pb6);
-		
-		Board board = new Board(pitsA,pitsB);
+
+		Board board = new Board(pitsA, pitsB);
 		return board;
 	}
 
 	public Board getBoard() {
 		return board;
 	}
-	
+
 	public void reloadBoard(Board board) {
 		this.board = board;
 	}
@@ -98,28 +97,28 @@ public class Game {
 		return secondPlayer;
 	}
 
-	public void addPlayer(Player newPlayer) throws IllegalStateException{
-		if(firstPlayer==null) {
+	public void addPlayer(Player newPlayer) throws IllegalStateException {
+		if (firstPlayer == null) {
 			firstPlayer = newPlayer;
 			currentPlayer = newPlayer;
-		}else if(secondPlayer==null) 
+		} else if (secondPlayer == null)
 			secondPlayer = newPlayer;
-		else throw new IllegalStateException("2 Other User are playing now");
+		else
+			throw new IllegalStateException("2 Other User are playing now");
 	}
-	
-	public void play(String src,String des) throws InvalidMoveException{
-		game.play(src,des);
+
+	public void play(String src, String des) throws InvalidMoveException {
+		game.play(src, des);
 	}
-	
-	
+
 	public boolean gameIsFinish() {
 		return game.gameIsFinish();
 	}
-	
+
 	public Player findWinner() {
-		if(game.gameIsFinish())
+		if (game.gameIsFinish())
 			return game.findWinner();
 		return null;
 	}
-	
+
 }

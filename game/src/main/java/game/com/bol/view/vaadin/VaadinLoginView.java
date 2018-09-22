@@ -19,48 +19,45 @@ import game.com.bol.Game;
 import game.com.bol.component.Player;
 
 @SpringUI(path = "login")
-public class VaadinLoginView extends UI implements ViewDisplay{
+public class VaadinLoginView extends UI implements ViewDisplay {
 
 	@Autowired
 	private Game game;
-	
+
 	private Panel springViewDisplay;
 
 	@Override
 	public void showView(View view) {
-        springViewDisplay.setContent((Component) view);
+		springViewDisplay.setContent((Component) view);
 
 	}
 
 	@Override
 	protected void init(VaadinRequest request) {
-		
-		final VerticalLayout layout = new VerticalLayout();
-        setContent(layout);
-        
-        
-        TextField firstPlayerName = new TextField("Enter Your Name:");
-        TextField secondPlayerName = new TextField("Enter Your Name:");
 
-        layout.addComponent(firstPlayerName);
-        layout.addComponent(secondPlayerName);
-        
-        Button playButton = new Button("LOGIN");
-        
-        playButton.addClickListener(new Button.ClickListener() {
-            public void buttonClick(ClickEvent event) {
-            	try {
+		final VerticalLayout layout = new VerticalLayout();
+		setContent(layout);
+
+		TextField firstPlayerName = new TextField("Enter Your Name:");
+		TextField secondPlayerName = new TextField("Enter Your Name:");
+
+		layout.addComponent(firstPlayerName);
+		layout.addComponent(secondPlayerName);
+
+		Button playButton = new Button("LOGIN");
+
+		playButton.addClickListener(new Button.ClickListener() {
+			public void buttonClick(ClickEvent event) {
+				try {
 					game.addPlayer(new Player(firstPlayerName.getValue()));
 					game.addPlayer(new Player(secondPlayerName.getValue()));
 					getPage().setLocation("game");
 				} catch (IllegalStateException e) {
-					Notification.show("Login Failed!",
-			                  e.getMessage(),
-			                  Notification.Type.HUMANIZED_MESSAGE);
+					Notification.show("Login Failed!", e.getMessage(), Notification.Type.HUMANIZED_MESSAGE);
 				}
-            }
-        });
-        layout.addComponent(playButton);
+			}
+		});
+		layout.addComponent(playButton);
 
 	}
 

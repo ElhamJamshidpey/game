@@ -3,21 +3,20 @@ package game.com.bol.component;
 import java.util.List;
 
 public class Board {
-	
+
 	private List<Pit> firstPlayerAPits;
-	
+
 	private Pit firstPlayerLargerPit;
-	
+
 	private List<Pit> secondPlayerBPits;
-	
+
 	private Pit secondPlayerLargerPit;
-	
-	
+
 	public Board(List<Pit> playerAPits, List<Pit> playerBPits) {
 		this.firstPlayerAPits = playerAPits;
-		this.firstPlayerLargerPit = new Pit("L",0);
+		this.firstPlayerLargerPit = new Pit("L", 0);
 		this.secondPlayerBPits = playerBPits;
-		this.secondPlayerLargerPit = new Pit("L",0);
+		this.secondPlayerLargerPit = new Pit("L", 0);
 	}
 
 	public List<Pit> getFirstPlayerAPits() {
@@ -51,6 +50,5 @@ public class Board {
 	public void setSecondPlayerLargerPit(Pit secondPlayerLargerPit) {
 		this.secondPlayerLargerPit = secondPlayerLargerPit;
 	}
-
 
 }

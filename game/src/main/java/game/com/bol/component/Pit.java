@@ -1,12 +1,11 @@
 package game.com.bol.component;
 
 public class Pit {
-	
+
 	private String id;
-	
+
 	private Integer stoneNumber;
 
-	
 	public Pit(String id, Integer stoneNumber) {
 		super();
 		this.id = id;
@@ -32,9 +31,10 @@ public class Pit {
 	public void addStone(Integer stones) {
 		this.stoneNumber += stones;
 	}
+
 	@Override
 	public String toString() {
 		return stoneNumber + " ";
 	}
-	
+
 }
