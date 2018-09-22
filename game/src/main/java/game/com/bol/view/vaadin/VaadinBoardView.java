@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewDisplay;
+import com.vaadin.server.ExternalResource;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.spring.annotation.SpringUI;
 import com.vaadin.ui.Button;
@@ -12,6 +13,7 @@ import com.vaadin.ui.Component;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Layout;
+import com.vaadin.ui.Link;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.TextField;
@@ -44,11 +46,8 @@ public class VaadinBoardView extends UI implements ViewDisplay{
 
 
 		if(game.getCurrentPlayer()==null) {
-//			Link loginLink = new Link("Click here for login",new ExternalResource("http://localhost:8080/login"));
-	        TextField ff = new TextField("Source");
-
-//			layout.addComponent(loginLink);
-			layout.addComponent(ff);
+			Link loginLink = new Link("Click here for login",new ExternalResource("http://localhost:8080/login"));
+			layout.addComponent(loginLink);
 
 		}else {	
         setContent(layout);
