@@ -20,7 +20,7 @@ public class BolDotComStrategy implements GameStrategy {
 		Board board = game.getBoard();
 		movingValidation(src, des);
 
-		// play and land the stones into source pit to destination pit(in each pit one stone)
+		// TODO play and land the stones into source pit to destination pit(in each pit one stone)
 		
 		game.reloadBoard(board);
 
@@ -32,13 +32,11 @@ public class BolDotComStrategy implements GameStrategy {
 				game.setCurrentPlayer(game.getFirstPlayer());
 		}
 
-//		if(gameIsFinish()) 
-//			findWinner();
 	}
 
 	public boolean movingValidation(String src, String des) throws InvalidMoveException {
 		/*
-		 * game rules: moving just to right no stone land in opponent's big pit
+		 * TODO game rules: moving just to right no stone land in opponent's big pit
 		 */
 		return true;
 	}
