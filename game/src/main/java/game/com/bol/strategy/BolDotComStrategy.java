@@ -48,10 +48,10 @@ public class BolDotComStrategy implements GameStrategy {
 
 	public boolean gameIsFinish() {
 		Board board = game.getBoard();
-		int playerApits = board.getFirstPlayerAPits().stream().map(Pit::getStoneNumber).mapToInt(Integer::intValue)
-				.sum();
-		int playerBpits = board.getSecondPlayerBPits().stream().map(Pit::getStoneNumber).mapToInt(Integer::intValue)
-				.sum();
+		int playerApits = board.getFirstPlayerAPits().stream().map(Pit::getStoneNumber)
+				.mapToInt(Integer::intValue).sum();
+		int playerBpits = board.getSecondPlayerBPits().stream().map(Pit::getStoneNumber)
+				.mapToInt(Integer::intValue).sum();
 
 		if (playerApits > 0 && playerBpits > 0)
 			return false;
