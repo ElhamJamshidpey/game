@@ -13,23 +13,22 @@ import game.com.bol.exception.InvalidMoveException;
 public class BolDotComStrategy implements GameStrategy {
 
 	@Autowired
-	private Game context;
+	private Game game;
 
 	public void play(String src, String des) throws InvalidMoveException {
 
-		Board board = context.getBoard();
+		Board board = game.getBoard();
 		movingValidation(src, des);
 
-		// play and land the stones into source pit to destination pit(in each pit one
-		// stone)
-		context.reloadBoard(board);
+		// play and land the stones into source pit to destination pit(in each pit one stone)
+		game.reloadBoard(board);
 
 		// switch player
 		if (!playerHasAnotherTurn()) {
-			if (context.getCurrentPlayer().getName().equals(context.getFirstPlayer()))
-				context.setCurrentPlayer(context.getSecondPlayer());
+			if (game.getCurrentPlayer().getName().equals(game.getFirstPlayer()))
+				game.setCurrentPlayer(game.getSecondPlayer());
 			else
-				context.setCurrentPlayer(context.getFirstPlayer());
+				game.setCurrentPlayer(game.getFirstPlayer());
 		}
 
 //		if(gameIsFinish()) 
@@ -49,7 +48,7 @@ public class BolDotComStrategy implements GameStrategy {
 	}
 
 	public boolean gameIsFinish() {
-		Board board = context.getBoard();
+		Board board = game.getBoard();
 		int playerApits = board.getFirstPlayerAPits().stream().map(Pit::getStoneNumber).mapToInt(Integer::intValue)
 				.sum();
 		int playerBpits = board.getSecondPlayerBPits().stream().map(Pit::getStoneNumber).mapToInt(Integer::intValue)
@@ -67,10 +66,10 @@ public class BolDotComStrategy implements GameStrategy {
 	}
 
 	public Player findWinner() {
-		if (context.getBoard().getFirstPlayerLargerPit().getStoneNumber() > context.getBoard()
+		if (game.getBoard().getFirstPlayerLargerPit().getStoneNumber() > game.getBoard()
 				.getSecondPlayerLargerPit().getStoneNumber())
-			return context.getFirstPlayer();
-		return context.getSecondPlayer();
+			return game.getFirstPlayer();
+		return game.getSecondPlayer();
 
 	}
 
