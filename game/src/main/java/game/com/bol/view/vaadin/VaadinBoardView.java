@@ -31,7 +31,7 @@ public class VaadinBoardView extends UI implements ViewDisplay {
 
 	private Panel springViewDisplay;
 	private VerticalLayout boardLayout = new VerticalLayout();
-	private final VerticalLayout layout = new VerticalLayout();
+	private final VerticalLayout mainLayout = new VerticalLayout();
 
 	@Override
 	public void showView(View view) {
@@ -41,22 +41,21 @@ public class VaadinBoardView extends UI implements ViewDisplay {
 
 	@Override
 	protected void init(VaadinRequest request) {
-		setContent(layout);
+		setContent(mainLayout);
 
 		if (game.getCurrentPlayer() == null) {
-			Link loginLink = new Link("Click here for login", new ExternalResource("/login"));
-			layout.addComponent(loginLink);
+			Link loginLink = new Link("Click here for login", new ExternalResource("login"));
+			mainLayout.addComponent(loginLink);
 
 		} else {
 			showBoard();
 
-			TextField src = new TextField("Source");
-			TextField des = new TextField("Destination");
+			TextField src = new TextField("Enter your pit number for remove stone(s):");
+			TextField des = new TextField("Enter pit number for start landing stone(s):");
 
-			Label winnerName = new Label();
 
-			layout.addComponent(src);
-			layout.addComponent(des);
+			mainLayout.addComponent(src);
+			mainLayout.addComponent(des);
 
 			Button playButton = new Button("PLAY");
 			Button reloadGameButton = new Button("RELOAD");
@@ -67,9 +66,10 @@ public class VaadinBoardView extends UI implements ViewDisplay {
 						game.play(src.getValue(), des.getValue());
 						showBoard();
 						if (game.gameIsFinish()) {
+							Label winnerName = new Label();
 							winnerName.setCaption("Game Is Finish , Winner " + game.findWinner());
-							layout.removeComponent(playButton);
-							layout.addComponents(winnerName);
+							mainLayout.removeComponent(playButton);
+							mainLayout.addComponents(winnerName);
 						}
 					} catch (InvalidMoveException e) {
 						Notification.show("Moving not allowed!", e.getMessage(), Notification.Type.HUMANIZED_MESSAGE);
@@ -80,7 +80,7 @@ public class VaadinBoardView extends UI implements ViewDisplay {
 			HorizontalLayout playButtons = new HorizontalLayout();
 			playButtons.addComponent(playButton);
 			playButtons.addComponent(reloadGameButton);
-			layout.addComponent(playButtons);
+			mainLayout.addComponent(playButtons);
 
 			reloadGameButton.addClickListener(new Button.ClickListener() {
 				public void buttonClick(ClickEvent event) {
@@ -109,7 +109,7 @@ public class VaadinBoardView extends UI implements ViewDisplay {
 				.forEach(p -> secondPlayerRow.addComponent(new Button(p.getStoneNumber().toString())));
 		secondPlayerRow.addComponent(new Button("L: " + board.getSecondPlayerLargerPit().getStoneNumber()));
 		boardLayout.addComponent(secondPlayerRow);
-		layout.replaceComponent(boardLayout, boardLayout);
+		mainLayout.replaceComponent(boardLayout, boardLayout);
 	}
 
 }
