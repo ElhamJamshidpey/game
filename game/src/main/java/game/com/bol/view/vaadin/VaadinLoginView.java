@@ -39,16 +39,19 @@ public class VaadinLoginView extends UI implements ViewDisplay{
         setContent(layout);
         
         
-        TextField playerName = new TextField("Enter Your Name:");
+        TextField firstPlayerName = new TextField("Enter Your Name:");
+        TextField secondPlayerName = new TextField("Enter Your Name:");
 
-        layout.addComponent(playerName);
-
+        layout.addComponent(firstPlayerName);
+        layout.addComponent(secondPlayerName);
+        
         Button playButton = new Button("LOGIN");
         
         playButton.addClickListener(new Button.ClickListener() {
             public void buttonClick(ClickEvent event) {
             	try {
-					game.addPlayer(new Player(playerName.getValue()));
+					game.addPlayer(new Player(firstPlayerName.getValue()));
+					game.addPlayer(new Player(secondPlayerName.getValue()));
 					getPage().setLocation("game");
 				} catch (IllegalStateException e) {
 					Notification.show("Login Failed!",
