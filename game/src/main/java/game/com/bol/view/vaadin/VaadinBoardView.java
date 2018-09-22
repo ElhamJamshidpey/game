@@ -32,7 +32,9 @@ public class VaadinBoardView extends UI implements ViewDisplay{
 	private Game game;
 	
 	private Panel springViewDisplay;
-		
+	private VerticalLayout boardLayout = new VerticalLayout();
+	private final VerticalLayout layout = new VerticalLayout();
+
 	@Override
 	public void showView(View view) {
         springViewDisplay.setContent((Component) view);
@@ -42,17 +44,13 @@ public class VaadinBoardView extends UI implements ViewDisplay{
 	@Override
 	protected void init(VaadinRequest request) {
 
-		final VerticalLayout layout = new VerticalLayout();
-
-
 		if(game.getCurrentPlayer()==null) {
 			Link loginLink = new Link("Click here for login",new ExternalResource("http://localhost:8080/login"));
 			layout.addComponent(loginLink);
 
 		}else {	
         setContent(layout);
-        
-        showBoard(layout);
+        showBoard();
         
         TextField src = new TextField("Source");
         TextField des = new TextField("Destination");
@@ -69,11 +67,11 @@ public class VaadinBoardView extends UI implements ViewDisplay{
             public void buttonClick(ClickEvent event) {
         		try {
 					game.play(src.getValue(),des.getValue());
-					showBoard(layout);
+					showBoard();
 	        		if(game.gameIsFinish()) {
 	            	   winnerName.setCaption("Game Is Finish , Winner "+ game.findWinner());
 	            	   layout.removeComponent(playButton);
-	            	   layout.addComponents(reloadGame,winnerName);
+	            	   layout.addComponents(winnerName);
 	        		}
 				} catch (InvalidMoveException e) {
 					Notification.show("Moving not allowed!",
@@ -83,8 +81,11 @@ public class VaadinBoardView extends UI implements ViewDisplay{
         		
             }
         });
-        layout.addComponent(playButton);
-        
+		HorizontalLayout buttons = new HorizontalLayout();
+		buttons.addComponent(playButton);
+		buttons.addComponent(reloadGame);
+		layout.addComponent(buttons);
+		
         reloadGame.addClickListener(new Button.ClickListener() {
             public void buttonClick(ClickEvent event) {
             	game.reload();
@@ -95,13 +96,14 @@ public class VaadinBoardView extends UI implements ViewDisplay{
 
 	}
 
-	private void showBoard(Layout layout) {
+	private void showBoard() {
+		boardLayout.removeAllComponents();
 		Board board = game.getBoard();
-		layout.addComponent(new Label("Current Player: " + game.getCurrentPlayer().getName()));
-		layout.addComponent(new Label(game.getFirstPlayer().getName()+" pits:"));
+		boardLayout.addComponent(new Label("Current Player: " + game.getCurrentPlayer().getName()));
+		boardLayout.addComponent(new Label(game.getFirstPlayer().getName()+" pits:"));
 		HorizontalLayout firstPlayerRow = new HorizontalLayout();
 		firstPlayerRow.addComponent(new Button("L: " + board.getSecondPlayerLargerPit().getStoneNumber()));
-		layout.addComponent(firstPlayerRow);
+		boardLayout.addComponent(firstPlayerRow);
 
 		for (int i = 0; i < board.getFirstPlayerAPits().size(); ++i) {
 						Pit p = board.getFirstPlayerAPits().get(i);
@@ -125,12 +127,13 @@ public class VaadinBoardView extends UI implements ViewDisplay{
 					// TODO repeat the same button click lister logic for larger pit?
 			
 			
-					layout.addComponent(new Label(game.getSecondPlayer().getName()+" pits:"));
+					boardLayout.addComponent(new Label(game.getSecondPlayer().getName()+" pits:"));
 					HorizontalLayout secondPlayerRow = new HorizontalLayout();
 					// TODO repeat the same logic from above for second player
 					board.getSecondPlayerBPits().forEach(p -> secondPlayerRow.addComponent(new Button(p.getStoneNumber().toString())));
 					secondPlayerRow.addComponent(new Button("L: " + board.getSecondPlayerLargerPit().getStoneNumber()));
-					layout.addComponent(secondPlayerRow);
+					boardLayout.addComponent(secondPlayerRow);
+					layout.replaceComponent(boardLayout, boardLayout);
 	}
 
     
