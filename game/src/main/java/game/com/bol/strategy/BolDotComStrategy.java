@@ -21,11 +21,12 @@ public class BolDotComStrategy implements GameStrategy {
 		movingValidation(src, des);
 
 		// play and land the stones into source pit to destination pit(in each pit one stone)
+		
 		game.reloadBoard(board);
 
 		// switch player
 		if (!playerHasAnotherTurn()) {
-			if (game.getCurrentPlayer().getName().equals(game.getFirstPlayer()))
+			if (game.getCurrentPlayer().equals(game.getFirstPlayer()))
 				game.setCurrentPlayer(game.getSecondPlayer());
 			else
 				game.setCurrentPlayer(game.getFirstPlayer());
@@ -39,7 +40,7 @@ public class BolDotComStrategy implements GameStrategy {
 		/*
 		 * game rules: moving just to right no stone land in opponent's big pit
 		 */
-		return false;
+		return true;
 	}
 
 	private boolean playerHasAnotherTurn() {
