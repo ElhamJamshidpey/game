@@ -12,7 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import game.com.bol.GameContext;
+import game.com.bol.Game;
 import game.com.bol.component.Board;
 import game.com.bol.component.Pit;
 import game.com.bol.component.Player;
@@ -22,7 +22,7 @@ import game.com.bol.component.Player;
 public class BolDotComStrategyTest {
 	
 	@MockBean
-	private GameContext contextMock;
+	private Game contextMock;
 	
 	@Autowired
 	private BolDotComStrategy strategy;

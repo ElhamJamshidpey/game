@@ -4,16 +4,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.security.auth.login.LoginException;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import game.com.bol.component.Board;
 import game.com.bol.component.Pit;
 import game.com.bol.component.Player;
-import game.com.bol.exception.LoginException;
+import game.com.bol.exception.InvalidMoveException;
+import game.com.bol.strategy.GameStrategy;
 
 @Component
-public class GameContext {
+public class Game {
+	
+	@Autowired
+	private GameStrategy game;
+	
 
 	private Board board;
 	private Player currentPlayer;
@@ -26,7 +33,7 @@ public class GameContext {
 	    board = initialBoard();
 	}
 	
-	public void refreshContext() {
+	public void reload() {
 		firstPlayer = null;
 		secondPlayer = null;
 		currentPlayer = null;
@@ -91,12 +98,28 @@ public class GameContext {
 		return secondPlayer;
 	}
 
-	public void addPlayer(Player newPlayer) throws LoginException{
+	public void addPlayer(Player newPlayer) throws IllegalStateException{
 		if(firstPlayer==null) {
 			firstPlayer = newPlayer;
 			currentPlayer = newPlayer;
 		}else if(secondPlayer==null) 
 			secondPlayer = newPlayer;
-		else throw new LoginException("2 Other User are playing now");
+		else throw new IllegalStateException("2 Other User are playing now");
 	}
+	
+	public void play(String src,String des) throws InvalidMoveException{
+		game.play(src,des);
+	}
+	
+	
+	public boolean gameIsFinish() {
+		return game.gameIsFinish();
+	}
+	
+	public Player findWinner() {
+		if(game.gameIsFinish())
+			return game.findWinner();
+		return null;
+	}
+	
 }

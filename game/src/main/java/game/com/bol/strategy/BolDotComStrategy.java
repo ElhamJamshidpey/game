@@ -3,20 +3,20 @@ package game.com.bol.strategy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import game.com.bol.GameContext;
+import game.com.bol.Game;
 import game.com.bol.component.Board;
 import game.com.bol.component.Pit;
 import game.com.bol.component.Player;
-import game.com.bol.exception.MovingException;
+import game.com.bol.exception.InvalidMoveException;
 
 @Component
 public class BolDotComStrategy implements GameStrategy {
 
 	@Autowired
-	private GameContext context;
+	private Game context;
 	
 	
-	public void play(String src, String des) throws MovingException{
+	public void play(String src, String des) throws InvalidMoveException{
 		
 		Board board = context.getBoard(); 
 		movingValidation(src,des);
@@ -37,7 +37,7 @@ public class BolDotComStrategy implements GameStrategy {
 //			findWinner();
 	}
 	
-	public boolean movingValidation(String src, String des) throws MovingException{
+	public boolean movingValidation(String src, String des) throws InvalidMoveException{
 		/* game rules:
 		   moving just to right
 		   no stone land in opponent's big pit

@@ -1,15 +1,16 @@
 package game.com.bol.exception;
 
-public class LoginException extends Exception{
-
+public class InvalidMoveException extends Exception {
+	
 	private final String message;
 
-	public LoginException(String message) {
+	public InvalidMoveException(String message) {
 		this.message = message;
 	}
 
 	public String getMessage() {
 		return message;
 	}
+
 
 }

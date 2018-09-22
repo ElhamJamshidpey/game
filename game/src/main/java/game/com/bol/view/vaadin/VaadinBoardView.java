@@ -6,7 +6,6 @@ import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewDisplay;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.spring.annotation.SpringUI;
-import com.vaadin.spring.annotation.SpringViewDisplay;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Component;
@@ -17,15 +16,15 @@ import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 
+import game.com.bol.Game;
 import game.com.bol.component.Board;
-import game.com.bol.exception.MovingException;
-import game.com.bol.presenter.BoardPresenter;
+import game.com.bol.exception.InvalidMoveException;
 
 @SpringUI(path = "game")
 public class VaadinBoardView extends UI implements ViewDisplay{
 
 	@Autowired
-	private BoardPresenter presenter;
+	private Game game;
 	
 	private Panel springViewDisplay;
 		
@@ -41,7 +40,7 @@ public class VaadinBoardView extends UI implements ViewDisplay{
 		final VerticalLayout layout = new VerticalLayout();
         setContent(layout);
         
-        showBoard(presenter.loadBoard());
+        showBoard();
         
         TextField src = new TextField("Source");
         TextField des = new TextField("Destination");
@@ -57,14 +56,14 @@ public class VaadinBoardView extends UI implements ViewDisplay{
         playButton.addClickListener(new Button.ClickListener() {
             public void buttonClick(ClickEvent event) {
         		try {
-					presenter.play(src.getValue(),des.getValue());
-					showBoard(presenter.loadBoard());
-	        		if(presenter.gameIsFinish()) {
-	            	   winnerName.setCaption("Game Is Finish , Winner "+ presenter.findWinner());
+					game.play(src.getValue(),des.getValue());
+					showBoard();
+	        		if(game.gameIsFinish()) {
+	            	   winnerName.setCaption("Game Is Finish , Winner "+ game.findWinner());
 	            	   layout.removeComponent(playButton);
 	            	   layout.addComponents(reloadGame,winnerName);
 	        		}
-				} catch (MovingException e) {
+				} catch (InvalidMoveException e) {
 					Notification.show("Moving not alowd!",
 			                  e.getMessage(),
 			                  Notification.Type.HUMANIZED_MESSAGE);
@@ -76,14 +75,14 @@ public class VaadinBoardView extends UI implements ViewDisplay{
         
         reloadGame.addClickListener(new Button.ClickListener() {
             public void buttonClick(ClickEvent event) {
-            	presenter.reloadGame();
+            	game.reload();
 				getPage().setLocation("login");
             }
         });
 
 	}
 
-	private void showBoard(Board loadBoard) {
+	private void showBoard() {
 		//TODO!
 	}
 

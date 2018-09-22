@@ -6,7 +6,6 @@ import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewDisplay;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.spring.annotation.SpringUI;
-import com.vaadin.spring.annotation.SpringViewDisplay;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Component;
@@ -16,15 +15,14 @@ import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 
+import game.com.bol.Game;
 import game.com.bol.component.Player;
-import game.com.bol.exception.LoginException;
-import game.com.bol.presenter.BoardPresenter;
 
 @SpringUI(path = "login")
 public class VaadinLoginView extends UI implements ViewDisplay{
 
 	@Autowired
-	private BoardPresenter presenter;
+	private Game game;
 	
 	private Panel springViewDisplay;
 
@@ -50,9 +48,9 @@ public class VaadinLoginView extends UI implements ViewDisplay{
         playButton.addClickListener(new Button.ClickListener() {
             public void buttonClick(ClickEvent event) {
             	try {
-					presenter.loginPlayer(new Player(playerName.getValue()));
+					game.addPlayer(new Player(playerName.getValue()));
 					getPage().setLocation("game");
-				} catch (LoginException e) {
+				} catch (IllegalStateException e) {
 					Notification.show("Login Failed!",
 			                  e.getMessage(),
 			                  Notification.Type.HUMANIZED_MESSAGE);
