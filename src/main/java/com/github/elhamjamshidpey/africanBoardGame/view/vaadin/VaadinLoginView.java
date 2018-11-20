@@ -1,7 +1,9 @@
-package game.com.bol.view.vaadin;
+package com.github.elhamjamshidpey.africanBoardGame.view.vaadin;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.github.elhamjamshidpey.africanBoardGame.Game;
+import com.github.elhamjamshidpey.africanBoardGame.component.Player;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewDisplay;
 import com.vaadin.server.VaadinRequest;
@@ -14,9 +16,6 @@ import com.vaadin.ui.Panel;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
-
-import game.com.bol.Game;
-import game.com.bol.component.Player;
 
 @SpringUI(path = "login")
 public class VaadinLoginView extends UI implements ViewDisplay {

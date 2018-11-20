@@ -1,16 +1,16 @@
-package game.com.bol.strategy;
+package com.github.elhamjamshidpey.africanBoardGame.strategy;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import game.com.bol.Game;
-import game.com.bol.component.Board;
-import game.com.bol.component.Pit;
-import game.com.bol.component.Player;
-import game.com.bol.exception.InvalidMoveException;
+import com.github.elhamjamshidpey.africanBoardGame.Game;
+import com.github.elhamjamshidpey.africanBoardGame.component.Board;
+import com.github.elhamjamshidpey.africanBoardGame.component.Pit;
+import com.github.elhamjamshidpey.africanBoardGame.component.Player;
+import com.github.elhamjamshidpey.africanBoardGame.exception.InvalidMoveException;
 
 @Component
-public class BolDotComStrategy implements GameStrategy {
+public class TraditionalStrategy implements GameStrategy {
 
 	@Autowired
 	private Game game;

@@ -1,4 +1,4 @@
-package game.com.bol;
+package com.github.elhamjamshidpey.africanBoardGame;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,4 +1,4 @@
-package game.com.bol.strategy;
+package com.github.elhamjamshidpey.africanBoardGame.strategy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,20 +12,21 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import game.com.bol.Game;
-import game.com.bol.component.Board;
-import game.com.bol.component.Pit;
-import game.com.bol.component.Player;
+import com.github.elhamjamshidpey.africanBoardGame.Game;
+import com.github.elhamjamshidpey.africanBoardGame.component.Board;
+import com.github.elhamjamshidpey.africanBoardGame.component.Pit;
+import com.github.elhamjamshidpey.africanBoardGame.component.Player;
+import com.github.elhamjamshidpey.africanBoardGame.strategy.TraditionalStrategy;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class BolDotComStrategyTest {
+public class TraditionalStrategyTest {
 	
 	@MockBean
 	private Game contextMock;
 	
 	@Autowired
-	private BolDotComStrategy strategy;
+	private TraditionalStrategy strategy;
 	
 	@Test
 	public void testGameIsNotFinish() {

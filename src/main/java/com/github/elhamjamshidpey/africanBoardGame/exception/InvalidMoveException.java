@@ -1,4 +1,4 @@
-package game.com.bol.exception;
+package com.github.elhamjamshidpey.africanBoardGame.exception;
 
 public class InvalidMoveException extends Exception {
 	

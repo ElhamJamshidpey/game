@@ -1,4 +1,4 @@
-package game.com.bol;
+package com.github.elhamjamshidpey.africanBoardGame;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,11 +9,11 @@ import javax.security.auth.login.LoginException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import game.com.bol.component.Board;
-import game.com.bol.component.Pit;
-import game.com.bol.component.Player;
-import game.com.bol.exception.InvalidMoveException;
-import game.com.bol.strategy.GameStrategy;
+import com.github.elhamjamshidpey.africanBoardGame.component.Board;
+import com.github.elhamjamshidpey.africanBoardGame.component.Pit;
+import com.github.elhamjamshidpey.africanBoardGame.component.Player;
+import com.github.elhamjamshidpey.africanBoardGame.exception.InvalidMoveException;
+import com.github.elhamjamshidpey.africanBoardGame.strategy.GameStrategy;
 
 @Component
 public class Game {

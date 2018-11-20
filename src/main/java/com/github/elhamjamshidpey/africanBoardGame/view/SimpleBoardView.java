@@ -1,8 +1,8 @@
-package game.com.bol.view;
+package com.github.elhamjamshidpey.africanBoardGame.view;
 
 import org.springframework.stereotype.Component;
 
-import game.com.bol.component.Board;
+import com.github.elhamjamshidpey.africanBoardGame.component.Board;
 
 @Component
 public class SimpleBoardView implements BoardView {

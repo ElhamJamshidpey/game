@@ -1,4 +1,4 @@
-package game.com.bol.component;
+package com.github.elhamjamshidpey.africanBoardGame.component;
 
 public class Player {
 

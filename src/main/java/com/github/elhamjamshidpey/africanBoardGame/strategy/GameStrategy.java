@@ -1,7 +1,7 @@
-package game.com.bol.strategy;
+package com.github.elhamjamshidpey.africanBoardGame.strategy;
 
-import game.com.bol.component.Player;
-import game.com.bol.exception.InvalidMoveException;
+import com.github.elhamjamshidpey.africanBoardGame.component.Player;
+import com.github.elhamjamshidpey.africanBoardGame.exception.InvalidMoveException;
 
 public interface GameStrategy {
 
