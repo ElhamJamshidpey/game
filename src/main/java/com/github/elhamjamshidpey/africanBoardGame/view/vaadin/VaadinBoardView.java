@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.github.elhamjamshidpey.africanBoardGame.Game;
 import com.github.elhamjamshidpey.africanBoardGame.component.Board;
 import com.github.elhamjamshidpey.africanBoardGame.exception.InvalidMoveException;
+import com.github.elhamjamshidpey.africanBoardGame.view.BoardView;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewDisplay;
 import com.vaadin.server.ExternalResource;
@@ -23,7 +24,7 @@ import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 
 @SpringUI(path = "game")
-public class VaadinBoardView extends UI implements ViewDisplay {
+public class VaadinBoardView extends UI implements ViewDisplay,BoardView{
 
 	@Autowired
 	private Game game;
@@ -49,12 +50,10 @@ public class VaadinBoardView extends UI implements ViewDisplay {
 		} else {
 			showBoard();
 
-			TextField src = new TextField("Enter your pit number for remove stone(s):");
-			TextField des = new TextField("Enter pit number for start landing stone(s):");
+			TextField srcIndex = new TextField("Enter your pit number for remove stone(s):");
 
 
-			mainLayout.addComponent(src);
-			mainLayout.addComponent(des);
+			mainLayout.addComponent(srcIndex);
 
 			Button playButton = new Button("PLAY");
 			Button reloadGameButton = new Button("RELOAD");
@@ -62,7 +61,7 @@ public class VaadinBoardView extends UI implements ViewDisplay {
 			playButton.addClickListener(new Button.ClickListener() {
 				public void buttonClick(ClickEvent event) {
 					try {
-						game.play(src.getValue(), des.getValue());
+						game.play(Integer.valueOf(srcIndex.getValue()));
 						showBoard();
 						if (game.gameIsFinish()) {
 							Label winnerName = new Label();
@@ -90,14 +89,15 @@ public class VaadinBoardView extends UI implements ViewDisplay {
 		}
 
 	}
-
-	private void showBoard() {
+	
+	@Override
+	public void showBoard() {
 		boardLayout.removeAllComponents();
 		Board board = game.getBoard();
 		boardLayout.addComponent(new Label("Current Player: " + game.getCurrentPlayer().getName()));
 		boardLayout.addComponent(new Label(game.getFirstPlayer().getName() + " pits:"));
 		HorizontalLayout firstPlayerRow = new HorizontalLayout();
-		firstPlayerRow.addComponent(new Button("L: " + board.getSecondPlayerLargerPit().getStoneNumber()));
+		firstPlayerRow.addComponent(new Button("L: " + board.getFirstPlayerLargerPit().getStoneNumber()));
 		boardLayout.addComponent(firstPlayerRow);
 		board.getFirstPlayerAPits()
 				.forEach(p -> firstPlayerRow.addComponent(new Button(p.getStoneNumber().toString())));

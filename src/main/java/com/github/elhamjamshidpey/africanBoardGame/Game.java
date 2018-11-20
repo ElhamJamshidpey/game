@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.security.auth.login.LoginException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -14,6 +13,8 @@ import com.github.elhamjamshidpey.africanBoardGame.component.Pit;
 import com.github.elhamjamshidpey.africanBoardGame.component.Player;
 import com.github.elhamjamshidpey.africanBoardGame.exception.InvalidMoveException;
 import com.github.elhamjamshidpey.africanBoardGame.strategy.GameStrategy;
+
+
 
 @Component
 public class Game {
@@ -107,8 +108,9 @@ public class Game {
 			throw new IllegalStateException("2 Other User are playing now");
 	}
 
-	public void play(String src, String des) throws InvalidMoveException {
-		game.play(src, des);
+	public void play(Integer srcIndex) throws InvalidMoveException {
+		game.play(srcIndex);
+		game.switchPlayer();
 	}
 
 	public boolean gameIsFinish() {

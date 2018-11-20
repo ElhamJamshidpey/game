@@ -5,9 +5,9 @@ import com.github.elhamjamshidpey.africanBoardGame.exception.InvalidMoveExceptio
 
 public interface GameStrategy {
 
-//	void play(Board board);
-	void play(String src, String des) throws InvalidMoveException;
-    boolean movingValidation(String src, String des) throws InvalidMoveException;
+	void play(Integer srcIndex) throws InvalidMoveException;
+    boolean movingValidation(Integer srcIndex) throws InvalidMoveException;
+    void switchPlayer();
 	boolean gameIsFinish();
 	Player findWinner();
 }

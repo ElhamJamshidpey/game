@@ -28,8 +28,12 @@ public class Pit {
 		this.stoneNumber = stoneNumber;
 	}
 
-	public void addStone(Integer stones) {
-		this.stoneNumber += stones;
+	public void addOneStone() {
+		this.stoneNumber += 1;
+	}
+	
+	public void addSomeStones(Integer stones) {
+		this.stoneNumber+= stones;
 	}
 
 	@Override

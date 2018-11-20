@@ -37,8 +37,8 @@ public class VaadinLoginView extends UI implements ViewDisplay {
 		final VerticalLayout layout = new VerticalLayout();
 		setContent(layout);
 
-		TextField firstPlayerName = new TextField("Enter Your Name:");
-		TextField secondPlayerName = new TextField("Enter Your Name:");
+		TextField firstPlayerName = new TextField("First Player Name:");
+		TextField secondPlayerName = new TextField("Second Player Name:");
 
 		layout.addComponent(firstPlayerName);
 		layout.addComponent(secondPlayerName);

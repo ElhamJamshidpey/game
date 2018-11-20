@@ -16,37 +16,36 @@ import com.github.elhamjamshidpey.africanBoardGame.Game;
 import com.github.elhamjamshidpey.africanBoardGame.component.Board;
 import com.github.elhamjamshidpey.africanBoardGame.component.Pit;
 import com.github.elhamjamshidpey.africanBoardGame.component.Player;
-import com.github.elhamjamshidpey.africanBoardGame.strategy.TraditionalStrategy;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class TraditionalStrategyTest {
 	
 	@MockBean
-	private Game contextMock;
+	private Game gameMock;
 	
 	@Autowired
 	private TraditionalStrategy strategy;
 	
 	@Test
 	public void testGameIsNotFinish() {
-		Mockito.when(contextMock.getBoard()).thenReturn(createBoardInStart());
+		Mockito.when(gameMock.getBoard()).thenReturn(createBoardInStart());
 		Assert.assertFalse(strategy.gameIsFinish());
 	}
 
 	@Test
 	public void testGameIsFinish() {
-		Mockito.when(contextMock.getBoard()).thenReturn(createBoardAfterFinish());
+		Mockito.when(gameMock.getBoard()).thenReturn(createBoardAfterFinish());
 		Assert.assertTrue(strategy.gameIsFinish());
 	}
 	
 	@Test
 	public void testFindWinner() {
-		Mockito.when(contextMock.getBoard()).thenReturn(createBoardAfterFinish());
+		Mockito.when(gameMock.getBoard()).thenReturn(createBoardAfterFinish());
 		Player p1 = new Player("Elham");
 		Player p2 = new Player("John");
-		Mockito.when(contextMock.getFirstPlayer()).thenReturn(p1);
-		Mockito.when(contextMock.getSecondPlayer()).thenReturn(p2);
+		Mockito.when(gameMock.getFirstPlayer()).thenReturn(p1);
+		Mockito.when(gameMock.getSecondPlayer()).thenReturn(p2);
 		Assert.assertEquals(p1,strategy.findWinner());
 	}
 	
